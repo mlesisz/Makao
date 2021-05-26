@@ -1,0 +1,16 @@
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\bin\Debug\net5.0\Client.exe
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\bin\Debug\net5.0\Client.deps.json
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\bin\Debug\net5.0\Client.runtimeconfig.json
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\bin\Debug\net5.0\Client.runtimeconfig.dev.json
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\bin\Debug\net5.0\Client.dll
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\bin\Debug\net5.0\ref\Client.dll
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\bin\Debug\net5.0\Client.pdb
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\obj\Debug\net5.0\Client.csprojAssemblyReference.cache
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\obj\Debug\net5.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\obj\Debug\net5.0\Client.AssemblyInfoInputs.cache
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\obj\Debug\net5.0\Client.AssemblyInfo.cs
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\obj\Debug\net5.0\Client.csproj.CoreCompileInputs.cache
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\obj\Debug\net5.0\Client.dll
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\obj\Debug\net5.0\ref\Client.dll
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\obj\Debug\net5.0\Client.pdb
+D:\Studia\Programowanie aplikacji sieciowych\Makao\Client\Client\obj\Debug\net5.0\Client.genruntimeconfig.cache
