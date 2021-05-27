@@ -11,7 +11,7 @@ namespace Client
     {
         static void Main()
         {
-            var endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 500);
+            var endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 4000);
             using (var socket = new Socket(SocketType.Stream, ProtocolType.Tcp))
             {
                 try
@@ -38,7 +38,7 @@ namespace Client
                     {
                         break;
                     }
-                    var buffer = new byte[1024];
+                    var buffer = new byte[256];
                     int dataSize = socket.Receive(buffer);
                     var responseMsg = ASCII.GetString(buffer
                         .Take(dataSize)
