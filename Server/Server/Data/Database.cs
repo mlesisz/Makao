@@ -49,6 +49,10 @@ namespace Server.Data
         {
             return database.Table<User>().Where(i => i.ID == id).FirstOrDefaultAsync();
         }
+        public Task<User> GetUserAsync(string nick)
+        {
+            return database.Table<User>().Where(i => i.Nick == nick).FirstOrDefaultAsync();
+        }
         public Task<int> SaveUserAsync(User user)
         {
             if (user.ID != 0)

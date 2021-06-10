@@ -8,7 +8,7 @@ namespace Server
 {
     public static class Settings
     {
-        public readonly static string IP = "127.0.0.1";
+        public readonly static string IP = "::1";
         public readonly static int Port = 4000;
     }
 }

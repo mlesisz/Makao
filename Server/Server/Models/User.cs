@@ -7,11 +7,13 @@ using SQLite;
 
 namespace Server.Models
 {
-    class User
+    public class User
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public int IdTable { get; set; }
+        public string Nick { get; set; }
+        public string Password { get; set; }
         public string Cards { get; set; }
         public int Points { get; set; }
     }

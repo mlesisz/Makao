@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "AS6RjN7C5H45K8+X7Qzn2oTkFQel1dRuYZpOV0aAnKSNML8yYj6rRBKllrxO41WScCLKqUkejF7jB42rWAhsTw==",
+  "success": true,
+  "projectFilePath": "D:\\Studia\\Programowanie aplikacji sieciowych\\Makao\\Server\\Server\\Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mariu\\.nuget\\packages\\sqlite-net-pcl\\1.7.335\\sqlite-net-pcl.1.7.335.nupkg.sha512",
+    "C:\\Users\\mariu\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.3\\sqlitepclraw.bundle_green.2.0.3.nupkg.sha512",
+    "C:\\Users\\mariu\\.nuget\\packages\\sqlitepclraw.core\\2.0.3\\sqlitepclraw.core.2.0.3.nupkg.sha512",
+    "C:\\Users\\mariu\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.3\\sqlitepclraw.lib.e_sqlite3.2.0.3.nupkg.sha512",
+    "C:\\Users\\mariu\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.3\\sqlitepclraw.provider.dynamic_cdecl.2.0.3.nupkg.sha512",
+    "C:\\Users\\mariu\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
+  "logs": []
+}

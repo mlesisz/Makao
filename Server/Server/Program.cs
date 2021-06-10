@@ -1,38 +1,18 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Text;
 using Server.Data;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Server
 {
-    public class ClientThread
-    {
-        public Socket Socket { get; set; }
-        public ClientThread(Socket socket)
-        {
-            Socket = socket;
-        }
-        
-        public void Run()
-        {
-            while (true)
-            {
-                byte[] buffer = new byte[256];
-                int len=Socket.Receive(buffer);
-                string msg = Encoding.UTF8.GetString(buffer);
-                Console.WriteLine(msg);
-                buffer = Encoding.UTF8.GetBytes(msg);
-                Socket.Send(buffer.Take(len).ToArray());
-            }
-        }
-    }
+    
     class Server
     {
         private static Database database;
+        public static List<ClientThread> clients = new List<ClientThread>();
         public string Address { get; set; }
         public int Port { get; set; }
 
@@ -54,42 +34,44 @@ namespace Server
             }
         }
 
-        public void Run()
+        public Socket GetSocket()
         {
             var endPoint = new IPEndPoint(IPAddress.Parse(Address), Port);
             var socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
             socket.Bind(endPoint);
             socket.Listen(10);
-            try
-            {                
-                while (true)
-                {
-                    try
-                    {
-                        Socket connection = socket.Accept();
-                        ClientThread clientThread = new ClientThread(connection);
-                        Thread thread = new Thread(new ThreadStart(clientThread.Run));
-                        thread.Start();
-                        DataLog dataLog = new DataLog()
-                        {
-                            host = ((IPEndPoint)connection.RemoteEndPoint).Address.ToString(),
-                            port = ((IPEndPoint)connection.RemoteEndPoint).Port,
-                            message = "Connected to the host.",
-                            action = "empty"
-                        };
-                        Logs.Info(dataLog);
-                    }
-                    catch (Exception e)
-                    {
+            return socket;
+        }
 
-                    }
-                    
-                    
-                }
-            }
-            catch
+        public void Run()
+        {
+            var socket = GetSocket();
+            while (true)
             {
+                try
+                {
+                    Socket connection = socket.Accept();
+                    ClientThread clientThread = new(connection);
+                    Monitor.Enter(clients);
+                    clients.Add(clientThread);
+                    Monitor.Exit(clients);
+                    Thread thread = new(new ThreadStart(clientThread.Run));
 
+                    thread.Start();
+
+                    DataLog dataLog = new()
+                    {
+                        Host = ((IPEndPoint)connection.RemoteEndPoint).Address.ToString(),
+                        Port = ((IPEndPoint)connection.RemoteEndPoint).Port,
+                        Message = "Connected to the host.",
+                    };
+                    Logs.Info(dataLog);
+                }
+                catch (Exception e)
+                {
+                    Logs.Error(new DataLog() { Message = e.Message });
+                    Console.WriteLine(e);
+                }
             }
         }
         public void StartServer()
@@ -103,7 +85,6 @@ namespace Server
         {
             Server server = new(Settings.IP,Settings.Port);
             server.StartServer();
-            
         }
     }
 }

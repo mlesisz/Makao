@@ -1,2 +1,75 @@
-26.05.2021 16:03:40 |  Host:::ffff:127.0.0.1 Port:64427 Message: Connected to the host. Action: empty
-26.05.2021 16:27:24 |  Host:::ffff:127.0.0.1 Port:58364 Message: Connected to the host. Action: empty
+28.05.2021 18:14:59 |  Host:::ffff:127.0.0.1 Port:64249 Message: Connected to the host. Action: empty
+28.05.2021 18:22:41 |  Host:::ffff:127.0.0.1 Port:64255 Message: Connected to the host. Action: empty
+28.05.2021 18:26:50 |  Host:::ffff:127.0.0.1 Port:64259 Message: Connected to the host. Action: empty
+28.05.2021 18:30:17 |  Host:::ffff:127.0.0.1 Port:64266 Message: Connected to the host. Action: empty
+28.05.2021 19:00:48 |  Host:::ffff:127.0.0.1 Port:64309 Message: Connected to the host. Action: empty
+28.05.2021 19:02:00 |  Host:::ffff:127.0.0.1 Port:64311 Message: Connected to the host. Action: empty
+28.05.2021 19:06:38 |  Host:::ffff:127.0.0.1 Port:64318 Message: Connected to the host. Action: empty
+28.05.2021 19:09:13 |  Host:::ffff:127.0.0.1 Port:64321 Message: Connected to the host. Action: empty
+28.05.2021 19:17:43 |  Host:::ffff:127.0.0.1 Port:64337 Message: Connected to the host. Action: 
+28.05.2021 19:17:46 |  Host:::ffff:127.0.0.1 Port:64337 Message: Error | System.Net.Sockets.SocketException (10054): Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+   at System.Net.Sockets.Socket.Receive(Byte[] buffer)
+   at Server.ClientThread.Run() in D:\Studia\Programowanie aplikacji sieciowych\Makao\Server\Server\Program.cs:line 30 Action: 
+28.05.2021 19:19:58 |  Host:::ffff:127.0.0.1 Port:64340 Message: Connected to the host. Action: 
+28.05.2021 19:20:01 |  Host:::ffff:127.0.0.1 Port:64340 Message: Error | Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta. Action: 
+29.05.2021 16:40:33 |  Host: ::1 Port: 61790 Message: Connected to the host. Action: 
+29.05.2021 16:40:57 |  Host: ::1 Port: 61790 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 17:22:45 |  Host: ::1 Port: 61522 Message: Connected to the host. Action: 
+31.05.2021 18:37:15 |  Host: ::1 Port: 51639 Message: Connected to the host. Action: 
+31.05.2021 18:37:36 |  Host: ::1 Port: 51639 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 18:59:19 |  Host: ::1 Port: 52749 Message: Connected to the host. Action: 
+31.05.2021 19:00:03 |  Host: ::1 Port: 52749 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 19:11:27 |  Host: ::1 Port: 60491 Message: Connected to the host. Action: 
+31.05.2021 20:23:29 |  Host: ::1 Port: 62760 Message: Connected to the host. Action: 
+31.05.2021 20:23:53 |  Host: ::1 Port: 62760 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 20:26:31 |  Host: ::1 Port: 62770 Message: Connected to the host. Action: 
+31.05.2021 20:26:43 |  Host: ::1 Port: 62770 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 20:27:34 |  Host: ::1 Port: 62778 Message: Connected to the host. Action: 
+31.05.2021 20:27:52 |  Host: ::1 Port: 62778 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 20:28:33 |  Host: ::1 Port: 62785 Message: Connected to the host. Action: 
+31.05.2021 20:28:40 |  Host: ::1 Port: 62785 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 20:30:58 |  Host: ::1 Port: 57288 Message: Connected to the host. Action: 
+31.05.2021 20:31:08 |  Host: ::1 Port: 57288 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 20:31:25 |  Host: ::1 Port: 57291 Message: Connected to the host. Action: 
+31.05.2021 20:31:33 |  Host: ::1 Port: 57291 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 20:44:24 |  Host: ::1 Port: 57299 Message: Connected to the host. Action: 
+31.05.2021 20:44:31 |  Host: ::1 Port: 57299 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 20:51:20 |  Host: ::1 Port: 57310 Message: Connected to the host. Action: 
+31.05.2021 20:51:25 |  Host: ::1 Port: 57310 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 20:51:55 |  Host: ::1 Port: 57312 Message: Connected to the host. Action: 
+31.05.2021 20:52:00 |  Host: ::1 Port: 57312 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 20:57:07 |  Host: ::1 Port: 49345 Message: Connected to the host. Action: 
+31.05.2021 20:57:13 |  Host: ::1 Port: 49345 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 20:57:54 |  Host: ::1 Port: 49346 Message: Connected to the host. Action: 
+31.05.2021 20:57:59 |  Host: ::1 Port: 49346 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 21:00:11 |  Host: ::1 Port: 50945 Message: Connected to the host. Action: 
+31.05.2021 21:00:15 |  Host: ::1 Port: 50945 Message: Error |  Action: Istniejące połączenie zostało gwałtownie zamknięte przez zdalnego hosta.
+31.05.2021 21:21:21 |  Host: ::1 Port: 50178 Message: Connected to the host. Action: 
+31.05.2021 21:22:45 |  Host: ::1 Port: 50179 Message: Connected to the host. Action: 
+31.05.2021 21:24:06 |  Host: ::1 Port: 50180 Message: Connected to the host. Action: 
+31.05.2021 21:26:06 |  Host: ::1 Port: 50184 Message: Connected to the host. Action: 
+31.05.2021 21:29:10 |  Host: ::1 Port: 50193 Message: Connected to the host. Action: 
+31.05.2021 21:29:38 |  Host: ::1 Port: 50193 Message: Error |  Action: Index was outside the bounds of the array.
+31.05.2021 21:34:37 |  Host: ::1 Port: 54261 Message: Connected to the host. Action: 
+31.05.2021 21:34:40 |  Host: ::1 Port: 54261 Message: Error | Index was outside the bounds of the array. Action: 
+31.05.2021 21:36:06 |  Host: ::1 Port: 54262 Message: Connected to the host. Action: 
+31.05.2021 21:36:08 |  Host: ::1 Port: 54262 Message: Error | Index was outside the bounds of the array.tutaj Action: 
+01.06.2021 11:29:18 |  Host: ::1 Port: 55929 Message: Connected to the host. Action: 
+01.06.2021 11:30:30 |  Host: ::1 Port: 55929 Message: Error | Index was outside the bounds of the array. Action: 
+01.06.2021 11:33:09 |  Host: ::1 Port: 55932 Message: Connected to the host. Action: 
+01.06.2021 11:33:17 |  Host: ::1 Port: 55932 Message: Error | Index was outside the bounds of the array. Action: 
+01.06.2021 11:37:37 |  Host: ::1 Port: 55936 Message: Connected to the host. Action: 
+01.06.2021 11:41:08 |  Host: ::1 Port: 55936 Message: Error | Index was outside the bounds of the array. Action: 
+01.06.2021 11:43:36 |  Host: ::1 Port: 54035 Message: Connected to the host. Action: 
+01.06.2021 11:43:52 |  Host: ::1 Port: 54035 Message: Error | Index was outside the bounds of the array. Action: 
+01.06.2021 11:44:34 |  Host: ::1 Port: 54037 Message: Connected to the host. Action: 
+01.06.2021 11:44:37 |  Host: ::1 Port: 54037 Message: Error | Index was outside the bounds of the array. Action: 
+01.06.2021 11:45:45 |  Host: ::1 Port: 54044 Message: Connected to the host. Action: 
+01.06.2021 11:45:47 |  Host: ::1 Port: 54044 Message: Error | Index was outside the bounds of the array. Action: 
+01.06.2021 11:46:49 |  Host: ::1 Port: 54045 Message: Connected to the host. Action: 
+01.06.2021 11:46:54 |  Host: ::1 Port: 54045 Message: Error | Index was outside the bounds of the array. Action: 
+01.06.2021 11:47:20 |  Host: ::1 Port: 54045 Message: Error | Index was outside the bounds of the array. Action: 
+01.06.2021 11:58:38 |  Host: ::1 Port: 54086 Message: Connected to the host. Action: 
+01.06.2021 11:58:39 |  Host: ::1 Port: 54086 Message: Error | Index was outside the bounds of the array. Action: 
+01.06.2021 12:06:36 |  Host: ::1 Port: 54092 Message: Connected to the host. Action: 
+01.06.2021 12:07:55 |  Host: ::1 Port: 54095 Message: Connected to the host. Action: 

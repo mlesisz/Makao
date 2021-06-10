@@ -9,23 +9,23 @@ namespace Server
 {
     public static class Logs
     {
-        private static string fileName = @"D:\Studia\Programowanie aplikacji sieciowych\Makao\Server\Server\logs.txt";
+        private static readonly string pathFile = Path.Combine(Environment.CurrentDirectory,"logs.txt");
 
         private static void WriteInformationToLogs(DataLog dataLog)
         {
             string log = DateTime.Now.ToString()+" | ";
-            log += " Host:"+dataLog.host+ 
-                " Port:"+ dataLog.port+
-                " Message: "+dataLog.message+
-                " Action: "+dataLog.action;
-            if (File.Exists(fileName))
+            log += " Host: "+ dataLog.Host+ 
+                " Port: "+ dataLog.Port+
+                " Message: "+dataLog.Message+
+                " Action: "+dataLog.Action;
+            if (File.Exists(pathFile))
             {
-                using StreamWriter file = new(fileName, append: true);
+                using StreamWriter file = new(pathFile, append: true);
                 file.WriteLine(log);
             }
             else
             {
-                File.WriteAllText(fileName,log+"\n");
+                File.WriteAllText(pathFile,log+"\n");
             }
             Console.WriteLine(log);
         }
@@ -33,17 +33,18 @@ namespace Server
         {
             WriteInformationToLogs(dataLog);
         }
-        public static void Error(string message)
+        public static void Error(DataLog dataLog)
         {
-
+            dataLog.Message = "Error | " + dataLog.Message;
+            WriteInformationToLogs(dataLog);
         }
     }
 
-    public struct DataLog
+    public class DataLog
     {
-        public string host;
-        public int port;
-        public string message;
-        public string action;
+        public string Host  { get; set; }
+        public int Port { get; set; }
+        public string Message { get; set; }
+        public string Action { get; set; }
     }
 }
