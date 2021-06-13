@@ -8,53 +8,49 @@ namespace ClientMakao
 {
     public static class Request
     {
-        private static int BodyLen(string body)
-        {
-            return body.Length;
-        }
         public static string Login(string login, string password)
         {
             string body = "Data:Login:"+login+ "\r\nPassword:" + password;
-            return "Action:Login\r\nContent-Length:"+BodyLen(body)+"\r\n"+ body + "\r\n\r\n";
+            return "Action:Login\r\n"+ body + "\r\n\r\n";
         }
         public static string Register (string login, string password)
         {
             string body = "Data:Login:" + login + "\r\nPassword:" + password;
-            return "Action:Register\r\nContent-Length:" + BodyLen(body) + "\r\n" + body + "\r\n\r\n";
+            return "Action:Register\r\n" + body + "\r\n\r\n";
         }
-        public static string Logout()
+        public static string Logout(string token)
         {
-            return "Action:Logout\r\nContent-Length:0\r\n\r\n";
+            return "Action:Logout\r\nToken:"+token+"\r\n\r\n";
         }
-        public static string CreateTable()
+        public static string CreateTable(string name, string token)
         {
-            return "Action:Create\r\nContent-Length:0\r\n\r\n";
+            return "Action:Create\r\nToken:"+token+"\r\nData:"+name+"\r\n\r\n";
         }
-        public static string ListTable()
+        public static string ListTable(string token)
         {
-            return "Action:List\r\nContent-Length:0\r\n\r\n";
+            return "Action:List\r\nToken:"+token+"\r\n\r\n";
         }
-        public static string JoinTable(int number)
+        public static string JoinTable(string nameTable, string token)
         {
-            string body = "Data:Number:" + number.ToString();
-            return "Action:Join\r\nContent-Length:"+BodyLen(body)+ "\r\n" + body+"\r\n\r\n";
+            string body = "Data:" + nameTable;
+            return "Action:Join\r\nToken:"+token+"\r\n" + body+"\r\n\r\n";
         }
-        public static string LeaveTable()
+        public static string LeaveTable(string token)
         {
-            return "Action:Leave\r\nContent-Length:0\r\n\r\n";
+            return "Action:Leave\r\nToken:"+token+"\r\n\r\n";
         }
-        public static string TakeCart()
+        public static string TakeCart(string token)
         {
-            return "Action:Take\r\nContent-Length:0\r\n\r\n";
+            return "Action:Take\r\nToken:"+token+"\r\n\r\n";
         }
-        public static string PlayCard(string name)
+        public static string PlayCard(string name, string token)
         {
             string body = "Data:Name:" + name;
-            return "Action:Play\r\nContent-Length:"+BodyLen(body)+ "\r\n" + body +"\r\n\r\n";
+            return "Action:Play\r\nToken:"+token+"\r\n" + body +"\r\n\r\n";
         }
         public static string End()
         {
-            return "Action:End\r\nContent-Length:0\r\n\r\n";
+            return "Action:End\r\n\r\n";
         }
     }
 }

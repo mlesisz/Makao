@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,33 +9,37 @@ namespace Server
 {
     public static class Response
     {
-        private static int BodyLen(string body)
+        public static string CreateResponse(string action, string status ="", string data ="", string message = "")
         {
-            return body.Length;
-        }
-        public static string Register(string status,string? message)
-        {
-            if (message == null)
-                return "Action:Register\r\nContent-Length:0\r\nStatus:" + status + "\r\n\r\n";
-            else
+            string res = "Action:" + action + "\r\n";
+            if(status != "")
             {
-                string body = "Message:" + message;
-                return "Action:Register\r\nContent-Length:" + BodyLen(body) + "\r\nStatus:" + status + "\r\nMessage:" + message + "\r\n\r\n";
+                res += "Status:" + status + "\r\n";
             }
-        }
-        public static string Login(string status,string token, string? message)
-        {
-            if (message == null)
-                return "Action:Login\r\nContent-Length:0\r\nStatus:" + status +"\r\nToken:"+ token +"\r\n\r\n";
-            else
+            if(data != "")
             {
-                string body = "Message:" + message;
-                return "Action:Login\r\nContent-Length:" + BodyLen(body) + "\r\nStatus:" + status + "\r\nMessage:" + message + "\r\n\r\n";
+                res += "Data:" + data + "\r\n";
             }
+            if(message != "")
+            {
+                res += "Message:" + message + "\r\n";
+            }
+            res += "\r\n";
+            return res;
         }
-        public static string Logout(string status)
+        public static bool SendResponse(Socket socket, string response)
         {
-            return "Action:Logout\r\nContent - Length:0\r\nStatus:"+status+"\r\n\r\n";
+            try
+            {
+                var data = Encoding.UTF8.GetBytes(response);
+                socket.Send(data);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
     }
 }

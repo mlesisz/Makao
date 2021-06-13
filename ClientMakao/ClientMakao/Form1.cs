@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,13 +21,18 @@ namespace ClientMakao
             InitializeComponent();
             SocketMenagment = new SocketMenagment("::1", 4000);
             ServerInfo.Text = SocketMenagment.StartConnect();
+            backgroundWorkerThreadReceiveResponse.RunWorkerAsync();
         }
-        private void backgroundWorkerThreadReceiveResponse_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorkerReceiveResponse_DoWork(object sender, DoWorkEventArgs e)
         {
             Response response;
-            while (!backgroundWorkerMainThread.CancellationPending)
+            string string_response;
+            while (!backgroundWorkerThreadReceiveResponse.CancellationPending)
             {
-                response = new Response(SocketMenagment.ReceiveResponse());
+                string_response = SocketMenagment.ReceiveResponse();
+                if (string_response == null)
+                    break;
+                response = new Response(string_response);
                 switch (response.Action)
                 {
                     case "Register":
@@ -39,18 +45,24 @@ namespace ClientMakao
                         LogoutStatus(response);
                         break;
                     case "Create":
+                        CrateStatus(response);
                         break;
                     case "List":
+                        ListStatus(response);
                         break;
                     case "Join":
+                        JoinStatus(response);
                         break;
                     case "Leave":
+                        LeaveStatus(response);
                         break;
                     case "Take":
                         break;
                     case "Play":
                         break;
-                    case "Status":
+                    case "State":
+                        StateStatus(response);
+                        break;
                     default:
                         SetTextServerInfo("Serwer wysłał odpowiedź której nie znam.");
                         break;
@@ -58,13 +70,92 @@ namespace ClientMakao
 
             }
         }
+        private void StateStatus(Response response)
+        {
+            SetTextRich(response.Message);
+            if(response.Message == "Odbieranie kart od graczy.")
+            {
+                SetListBoxCarts("",true);
+            }else if(response.Message == "Twój ruch.")
+            {
+                ChangeEnabledButtonTakeCart();
+                ChangeEnabledButtonPlayCard();
+            }
+        }
+        private void JoinStatus(Response response)
+        {
+            switch (response.Status)
+            {
+                case "OK":
+                    SetTextServerInfo(response.Message);
+                    ChangeVisiblePanelGame();
+                    ChangeVisiblePanelMenu();
+                    break;
+                case "ERROR":
+                    SetTextServerInfo(response.Message);
+                    break;
+                case "WRONG":
+                    SetTextServerInfo(response.Message);
+                    break;
+            }
+        }
+        private void LeaveStatus(Response response)
+        {
+            switch (response.Status)
+            {
+                case "OK":
+                    SetTextServerInfo("Odszedłeś od stolika.");
+                    ChangeVisiblePanelGame();
+                    ChangeVisiblePanelMenu();
+                    break;
+                case "ERROR":
+                    SetTextServerInfo(response.Message);
+                    break;
+                case "WRONG":
+                    SetTextServerInfo(response.Message);
+                    break;
+            }
+        }
+        private void ListStatus(Response response)
+        {
+            switch (response.Status)
+            {
+                case "OK":
+                    SetListBoxTable((string)response.Data);
+                    break;
+                case "ERROR":
+                    SetTextServerInfo(response.Message);
+                    break;
+                case "WRONG":
+                    SetTextServerInfo(response.Message);
+                    SetListBoxTable("");
+                    break;
+            }
+        }
+        private void CrateStatus(Response response)
+        {
+            switch (response.Status)
+            {
+                case "OK":
+                    ChangeVisiblePanelMenu();
+                    ChangeVisiblePanelGame();
+                    SetTextServerInfo((string)response.Message);
+                    break;
+                case "ERROR":
+                    SetTextServerInfo(response.Message);
+                    break;
+                case "WRONG":
+                    SetTextServerInfo(response.Message);
+                    break;
+            }
+        }
         private void LogoutStatus(Response response)
         {
             switch (response.Status)
             {
                 case "OK":
-                    buttonLogOut.Visible = false;
-                    panelMenu.Visible = false;
+                    ChangeVisiblepanelLoginAndRegister();
+                    ChangeVisiblePanelMenu();
                     SetTextServerInfo("Wylogowanie udało się.");
                     break;
                 case "ERROR":
@@ -83,8 +174,8 @@ namespace ClientMakao
                 case "OK":
                     Token = (string)response.Data;
                     SetTextServerInfo("Logowanie udane.");
-                    panelMenu.Visible = true;
-                    buttonLogOut.Visible = true;
+                    ChangeVisiblepanelLoginAndRegister();
+                    ChangeVisiblePanelMenu();
                     break;
                 case "ERROR":
                     SetTextServerInfo(response.Message);
@@ -112,22 +203,99 @@ namespace ClientMakao
                     break;
             }
         }
+
+        private void ChangeEnabledButtonTakeCart()
+        {
+            Invoke(new Action(() => { buttonTakeCart.Enabled = !buttonTakeCart.Enabled; }));
+        }
+
+        private void ChangeEnabledButtonPlayCard()
+        {
+            Invoke(new Action(() => { buttonPlayCart.Enabled = !buttonPlayCart.Enabled; }));
+        }
+
+        delegate void SetTextRichCallBack(string text);
+        private void SetTextRich(string text)
+        {
+            if (ServerInfo.InvokeRequired)
+            {
+                SetTextRichCallBack st = new SetTextRichCallBack(SetTextRich);
+                Invoke(st, new object[] { text });
+            }
+            else
+                richTextMessages.Text += text + "\n"; 
+        }
+
+        delegate void SetListBoxCartsCallBack(string cart, bool remove);
+        private void SetListBoxCarts(string cart, bool remove)
+        {
+            if (listBoxCart.InvokeRequired)
+            {
+                SetListBoxCartsCallBack sl = new SetListBoxCartsCallBack(SetListBoxCarts);
+                Invoke(sl, new object[] { cart,remove });
+            }
+            else
+            {
+                if (cart == "")
+                    listBoxCart.Items.Clear();
+                else if (remove)
+                    listBoxCart.Items.Remove(cart);
+                else
+                    listBoxCart.Items.Add(cart);
+            }
+        }
+
+        delegate void SetListBoxTableCallBack(string listTable);
+        private void SetListBoxTable(string listTable)
+        {
+            if (listBoxTable.InvokeRequired)
+            {
+                SetListBoxTableCallBack sl = new SetListBoxTableCallBack(SetListBoxTable);
+                Invoke(sl, new object []{listTable });
+            }
+            else
+            {
+                string[] list = listTable.Split(";");
+                listBoxTable.Items.Clear();
+                foreach(string item in list)
+                {
+                    listBoxTable.Items.Add(item);
+                }
+            }
+        }
+
+        private void ChangeVisiblePanelGame()
+        {
+            Invoke(new Action(() => { panelGame.Visible = !panelGame.Visible; }));
+        }
+
+        private void ChangeVisiblepanelLoginAndRegister()
+        {
+            Invoke(new Action(() => { panelLoginAndRegister.Visible = !panelLoginAndRegister.Visible; }));
+        }
+
+        private void ChangeVisiblePanelMenu()
+        {
+            Invoke(new Action(() => { panelMenu.Visible = !panelMenu.Visible; }));
+        }
+
         delegate void SetTextServerInfoCallBack(string text);
         private void SetTextServerInfo(string text)
         {
             if (ServerInfo.InvokeRequired)
             {
                 SetTextServerInfoCallBack st = new SetTextServerInfoCallBack(SetTextServerInfo);
-                this.Invoke(st, new object[] { text });
+                Invoke(st, new object[] { text });
             }
             else
-                this.ServerInfo.Text = text;
+                ServerInfo.Text = text;
         }
        
         private void Form1_FormClosing_1(object sender, FormClosingEventArgs e)
         {
             SocketMenagment.SendRequest(Request.End());
             SocketMenagment.socket.Close();
+
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -150,34 +318,34 @@ namespace ClientMakao
 
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
-            SocketMenagment.SendRequest(Request.Logout());
+            SocketMenagment.SendRequest(Request.Logout(Token));
         }
 
         private void buttonCreateTable_Click(object sender, EventArgs e)
         {
-            SocketMenagment.SendRequest(Request.CreateTable());
+            SocketMenagment.SendRequest(Request.CreateTable(textBoxNameTable.Text,Token));
         }
 
         private void buttonGetListTable_Click(object sender, EventArgs e)
         {
-            SocketMenagment.SendRequest(Request.ListTable());
+            SocketMenagment.SendRequest(Request.ListTable(Token));
         }
 
         private void buttonTakeCart_Click(object sender, EventArgs e)
         {
-            SocketMenagment.SendRequest(Request.TakeCart());
+            SocketMenagment.SendRequest(Request.TakeCart(Token));
         }
 
         private void buttonLeaveTable_Click(object sender, EventArgs e)
         {
-            SocketMenagment.SendRequest(Request.LeaveTable());
+            SocketMenagment.SendRequest(Request.LeaveTable(Token));
         }
 
         private void buttonJoinTable_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(listBoxTable.ValueMember))
+            if(listBoxTable.SelectedItem != null)
             {
-                SocketMenagment.SendRequest(Request.JoinTable(int.Parse(listBoxTable.ValueMember)));
+                SocketMenagment.SendRequest(Request.JoinTable(listBoxTable.SelectedItem.ToString(),Token));
             }
             
         }
@@ -186,7 +354,7 @@ namespace ClientMakao
         {
             if (!string.IsNullOrEmpty(listBoxCart.ValueMember))
             {
-                SocketMenagment.SendRequest(Request.PlayCard(listBoxCart.ValueMember));
+                SocketMenagment.SendRequest(Request.PlayCard(listBoxCart.ValueMember, Token));
             }
         }
 

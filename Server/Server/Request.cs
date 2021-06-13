@@ -10,40 +10,38 @@ namespace Server
     public class Request
     {
         public string Action { get; set; }
-        public int? ContentLength { get; set; }
-        public object Body { get; set; }
+        public string Token { get; set; }
+        public object Data { get; set; }
+        public Request()
+        {
+
+        }
         public Request(string request)
         {
             Action = request.Split("Action:")[1].Split("\r\n")[0];
-            GetContentLength(request);
-            if( ContentLength != null && ContentLength != 0)
-                GetBody(request.Split("Data:")[1].Split("\r\n")[0]);
+            if(request.Contains("Token:"))
+                Token=request.Split("Token:")[1].Split("\r\n")[0];
+            if (request.Contains("Data:"))
+                GetData(request.Split("Data:")[1]);
         }
-        private void GetContentLength(string request)
-        {
-            if (request.Contains("Content-Length:"))
-            {
-                ContentLength = int.Parse(request.Split("Content-Length:")[1].Split("\r\n")[0]);
-            }
-            else
-            {
-                ContentLength = null;
-            }
-        }
-        public void GetBody(string data)
+        public void GetData(string data)
         {
             if(Action == "Register" || Action == "Login")
             {
                 BodyRegisterOrLogin body = new BodyRegisterOrLogin();
-                body.Nick = data.Split("Nick:")[1].Split("\r\n")[0];
+                body.Login = data.Split("Login:")[1].Split("\r\n")[0];
                 body.Password = data.Split("Password:")[1].Split("\r\n")[0];
-                Body = body;
+                Data = body;
+            }
+            else
+            {
+                Data = data.Split("\r\n")[0];
             }
         }
     }
     public class BodyRegisterOrLogin
     {
-        public string Nick { get; set; }
+        public string Login { get; set; }
         public string Password { get; set; }
     }
 }

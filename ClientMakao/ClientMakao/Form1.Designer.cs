@@ -37,13 +37,15 @@ namespace ClientMakao
             this.textNick = new System.Windows.Forms.TextBox();
             this.Nick = new System.Windows.Forms.Label();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxNameTable = new System.Windows.Forms.TextBox();
             this.buttonJoinTable = new System.Windows.Forms.Button();
             this.listBoxTable = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.buttonLogOut = new System.Windows.Forms.Button();
             this.buttonGetListTable = new System.Windows.Forms.Button();
             this.buttonCreateTable = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonLogOut = new System.Windows.Forms.Button();
             this.panelGame = new System.Windows.Forms.Panel();
             this.richTextMessages = new System.Windows.Forms.RichTextBox();
             this.buttonLeaveTable = new System.Windows.Forms.Button();
@@ -125,17 +127,37 @@ namespace ClientMakao
             // 
             // panelMenu
             // 
+            this.panelMenu.Controls.Add(this.label4);
+            this.panelMenu.Controls.Add(this.textBoxNameTable);
             this.panelMenu.Controls.Add(this.buttonJoinTable);
             this.panelMenu.Controls.Add(this.listBoxTable);
             this.panelMenu.Controls.Add(this.label2);
+            this.panelMenu.Controls.Add(this.buttonLogOut);
             this.panelMenu.Controls.Add(this.buttonGetListTable);
             this.panelMenu.Controls.Add(this.buttonCreateTable);
             this.panelMenu.Controls.Add(this.label1);
             this.panelMenu.Location = new System.Drawing.Point(13, 112);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(135, 284);
+            this.panelMenu.Size = new System.Drawing.Size(135, 317);
             this.panelMenu.TabIndex = 6;
             this.panelMenu.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(71, 15);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Nazwa stołu";
+            // 
+            // textBoxNameTable
+            // 
+            this.textBoxNameTable.Location = new System.Drawing.Point(9, 72);
+            this.textBoxNameTable.MaxLength = 15;
+            this.textBoxNameTable.Name = "textBoxNameTable";
+            this.textBoxNameTable.Size = new System.Drawing.Size(100, 23);
+            this.textBoxNameTable.TabIndex = 6;
             // 
             // buttonJoinTable
             // 
@@ -151,23 +173,33 @@ namespace ClientMakao
             // 
             this.listBoxTable.FormattingEnabled = true;
             this.listBoxTable.ItemHeight = 15;
-            this.listBoxTable.Location = new System.Drawing.Point(10, 122);
+            this.listBoxTable.Location = new System.Drawing.Point(10, 167);
             this.listBoxTable.Name = "listBoxTable";
-            this.listBoxTable.Size = new System.Drawing.Size(100, 124);
+            this.listBoxTable.Size = new System.Drawing.Size(100, 79);
             this.listBoxTable.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 103);
+            this.label2.Location = new System.Drawing.Point(11, 145);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "Wolne stoły:";
             // 
+            // buttonLogOut
+            // 
+            this.buttonLogOut.Location = new System.Drawing.Point(10, 282);
+            this.buttonLogOut.Name = "buttonLogOut";
+            this.buttonLogOut.Size = new System.Drawing.Size(100, 23);
+            this.buttonLogOut.TabIndex = 1;
+            this.buttonLogOut.Text = "Wyloguj się ";
+            this.buttonLogOut.UseVisualStyleBackColor = true;
+            this.buttonLogOut.Click += new System.EventHandler(this.buttonLogOut_Click);
+            // 
             // buttonGetListTable
             // 
-            this.buttonGetListTable.Location = new System.Drawing.Point(10, 59);
+            this.buttonGetListTable.Location = new System.Drawing.Point(9, 101);
             this.buttonGetListTable.Name = "buttonGetListTable";
             this.buttonGetListTable.Size = new System.Drawing.Size(100, 41);
             this.buttonGetListTable.TabIndex = 2;
@@ -194,17 +226,6 @@ namespace ClientMakao
             this.label1.TabIndex = 0;
             this.label1.Text = "Menu";
             // 
-            // buttonLogOut
-            // 
-            this.buttonLogOut.Location = new System.Drawing.Point(22, 402);
-            this.buttonLogOut.Name = "buttonLogOut";
-            this.buttonLogOut.Size = new System.Drawing.Size(100, 23);
-            this.buttonLogOut.TabIndex = 1;
-            this.buttonLogOut.Text = "Wyloguj się ";
-            this.buttonLogOut.UseVisualStyleBackColor = true;
-            this.buttonLogOut.Visible = false;
-            this.buttonLogOut.Click += new System.EventHandler(this.buttonLogOut_Click);
-            // 
             // panelGame
             // 
             this.panelGame.Controls.Add(this.richTextMessages);
@@ -217,6 +238,7 @@ namespace ClientMakao
             this.panelGame.Name = "panelGame";
             this.panelGame.Size = new System.Drawing.Size(608, 396);
             this.panelGame.TabIndex = 2;
+            this.panelGame.Visible = false;
             // 
             // richTextMessages
             // 
@@ -242,6 +264,7 @@ namespace ClientMakao
             // 
             // buttonPlayCart
             // 
+            this.buttonPlayCart.Enabled = false;
             this.buttonPlayCart.Location = new System.Drawing.Point(465, 128);
             this.buttonPlayCart.Name = "buttonPlayCart";
             this.buttonPlayCart.Size = new System.Drawing.Size(130, 23);
@@ -270,6 +293,7 @@ namespace ClientMakao
             // 
             // buttonTakeCart
             // 
+            this.buttonTakeCart.Enabled = false;
             this.buttonTakeCart.Location = new System.Drawing.Point(465, 159);
             this.buttonTakeCart.Name = "buttonTakeCart";
             this.buttonTakeCart.Size = new System.Drawing.Size(130, 23);
@@ -289,7 +313,7 @@ namespace ClientMakao
             // 
             // backgroundWorkerThreadReceiveResponse
             // 
-            this.backgroundWorkerThreadReceiveResponse.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerThreadReceiveResponse_DoWork);
+            this.backgroundWorkerThreadReceiveResponse.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerReceiveResponse_DoWork);
             // 
             // Form1
             // 
@@ -299,7 +323,6 @@ namespace ClientMakao
             this.Controls.Add(this.ServerInfo);
             this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panelGame);
-            this.Controls.Add(this.buttonLogOut);
             this.Controls.Add(this.panelLoginAndRegister);
             this.MaximumSize = new System.Drawing.Size(800, 480);
             this.MinimumSize = new System.Drawing.Size(800, 480);
@@ -344,6 +367,8 @@ namespace ClientMakao
         private System.Windows.Forms.TextBox ServerInfo;
         private System.ComponentModel.BackgroundWorker backgroundWorkerMainThread;
         private System.ComponentModel.BackgroundWorker backgroundWorkerThreadReceiveResponse;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxNameTable;
     }
 }
 

@@ -12,7 +12,7 @@ namespace Server
     class Server
     {
         private static Database database;
-        public static List<ClientThread> clients = new List<ClientThread>();
+        public static List<Croupier> croupiers = new List<Croupier>();
         public string Address { get; set; }
         public int Port { get; set; }
 
@@ -52,9 +52,6 @@ namespace Server
                 {
                     Socket connection = socket.Accept();
                     ClientThread clientThread = new(connection);
-                    Monitor.Enter(clients);
-                    clients.Add(clientThread);
-                    Monitor.Exit(clients);
                     Thread thread = new(new ThreadStart(clientThread.Run));
 
                     thread.Start();
