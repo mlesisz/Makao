@@ -17,3 +17,5 @@ Są to karty: 5, 6, 7, 8, 9, 10 oraz Król Karo i Król Trefl.
 * Dama - Dama na wszystko, wszystko na dame.
 * As - Wymusza zmianę koloru.
 
+Efekty kart funkcyjnych nie mogą się sumować i przechodzić na następnego gracza. 
+
