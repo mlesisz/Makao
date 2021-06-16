@@ -18,8 +18,21 @@ namespace Server.Models
         [Ignore]
         public List<string> Cards { get; set; }
         [Ignore]
-        public int Points { get; set; }
+        public object ForcMovement { get; set; } 
         [Ignore]
         public Socket Socket { get; set; }
+    }
+
+    public class ForcMovementTake
+    {
+        public int Number { get; set; }
+    }
+    public class ForcMovementColor
+    {
+        public string Color { get; set; }
+    }
+    public class ForcMovementNumber
+    {
+        public string Number { get; set; }
     }
 }

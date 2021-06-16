@@ -9,14 +9,14 @@ using System.Collections.Generic;
 namespace Server
 {
     
-    class Server
+    class MakaoServerProtocol
     {
         private static Database database;
         public static List<Croupier> croupiers = new List<Croupier>();
         public string Address { get; set; }
         public int Port { get; set; }
 
-        public Server(string address, int port)
+        public MakaoServerProtocol(string address, int port)
         {
             Address = address;
             Port = port;
@@ -80,7 +80,7 @@ namespace Server
     {
         static void Main()
         {
-            Server server = new(Settings.IP,Settings.Port);
+            MakaoServerProtocol server = new(Settings.IP,Settings.Port);
             server.StartServer();
         }
     }

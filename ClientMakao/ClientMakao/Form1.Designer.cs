@@ -55,6 +55,10 @@ namespace ClientMakao
             this.buttonTakeCart = new System.Windows.Forms.Button();
             this.ServerInfo = new System.Windows.Forms.TextBox();
             this.backgroundWorkerThreadReceiveResponse = new System.ComponentModel.BackgroundWorker();
+            this.labelColor = new System.Windows.Forms.Label();
+            this.listBoxColor = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.listBoxCardOnWalet = new System.Windows.Forms.ListBox();
             this.panelLoginAndRegister.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelGame.SuspendLayout();
@@ -228,6 +232,10 @@ namespace ClientMakao
             // 
             // panelGame
             // 
+            this.panelGame.Controls.Add(this.listBoxCardOnWalet);
+            this.panelGame.Controls.Add(this.label5);
+            this.panelGame.Controls.Add(this.listBoxColor);
+            this.panelGame.Controls.Add(this.labelColor);
             this.panelGame.Controls.Add(this.richTextMessages);
             this.panelGame.Controls.Add(this.buttonLeaveTable);
             this.panelGame.Controls.Add(this.buttonPlayCart);
@@ -264,7 +272,6 @@ namespace ClientMakao
             // 
             // buttonPlayCart
             // 
-            this.buttonPlayCart.Enabled = false;
             this.buttonPlayCart.Location = new System.Drawing.Point(465, 128);
             this.buttonPlayCart.Name = "buttonPlayCart";
             this.buttonPlayCart.Size = new System.Drawing.Size(130, 23);
@@ -293,7 +300,6 @@ namespace ClientMakao
             // 
             // buttonTakeCart
             // 
-            this.buttonTakeCart.Enabled = false;
             this.buttonTakeCart.Location = new System.Drawing.Point(465, 159);
             this.buttonTakeCart.Name = "buttonTakeCart";
             this.buttonTakeCart.Size = new System.Drawing.Size(130, 23);
@@ -314,6 +320,54 @@ namespace ClientMakao
             // backgroundWorkerThreadReceiveResponse
             // 
             this.backgroundWorkerThreadReceiveResponse.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerReceiveResponse_DoWork);
+            // 
+            // labelColor
+            // 
+            this.labelColor.AutoSize = true;
+            this.labelColor.Location = new System.Drawing.Point(466, 219);
+            this.labelColor.Name = "labelColor";
+            this.labelColor.Size = new System.Drawing.Size(77, 15);
+            this.labelColor.TabIndex = 7;
+            this.labelColor.Text = "Kolor po Asie";
+            // 
+            // listBoxColor
+            // 
+            this.listBoxColor.FormattingEnabled = true;
+            this.listBoxColor.ItemHeight = 15;
+            this.listBoxColor.Items.AddRange(new object[] {
+            "Trefl",
+            "Karo",
+            "Kier",
+            "Pik"});
+            this.listBoxColor.Location = new System.Drawing.Point(466, 238);
+            this.listBoxColor.Name = "listBoxColor";
+            this.listBoxColor.Size = new System.Drawing.Size(120, 49);
+            this.listBoxColor.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(466, 294);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(119, 15);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Jaka karta po Walecie";
+            // 
+            // listBoxCardOnWalet
+            // 
+            this.listBoxCardOnWalet.FormattingEnabled = true;
+            this.listBoxCardOnWalet.ItemHeight = 15;
+            this.listBoxCardOnWalet.Items.AddRange(new object[] {
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.listBoxCardOnWalet.Location = new System.Drawing.Point(465, 312);
+            this.listBoxCardOnWalet.Name = "listBoxCardOnWalet";
+            this.listBoxCardOnWalet.Size = new System.Drawing.Size(120, 79);
+            this.listBoxCardOnWalet.TabIndex = 10;
             // 
             // Form1
             // 
@@ -369,6 +423,10 @@ namespace ClientMakao
         private System.ComponentModel.BackgroundWorker backgroundWorkerThreadReceiveResponse;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxNameTable;
+        private System.Windows.Forms.ListBox listBoxCardOnWalet;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListBox listBoxColor;
+        private System.Windows.Forms.Label labelColor;
     }
 }
 

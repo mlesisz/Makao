@@ -43,9 +43,11 @@ namespace ClientMakao
         {
             return "Action:Take\r\nToken:"+token+"\r\n\r\n";
         }
-        public static string PlayCard(string name, string token)
+        public static string PlayCard(string name, string token, string task ="")
         {
-            string body = "Data:Name:" + name;
+            string body = "Data:Card:" + name;
+            if (task != "")
+                body += "\r\nTask:" + task;
             return "Action:Play\r\nToken:"+token+"\r\n" + body +"\r\n\r\n";
         }
         public static string End()

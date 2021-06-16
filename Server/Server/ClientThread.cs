@@ -32,7 +32,7 @@ namespace Server
         {
             try
             {
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[256];
                 string msg = "";
                 int len = 0;
                 while (!msg.Contains("\r\n\r\n"))
@@ -60,7 +60,7 @@ namespace Server
                 case "Register":
                     try
                     {
-                        user = await Server.Database.GetUserAsync(((BodyRegisterOrLogin)request.Data).Login);
+                        user = await MakaoServerProtocol.Database.GetUserAsync(((BodyRegisterOrLogin)request.Data).Login);
                         if (user == null)
                         {
                             user = new User()
@@ -68,7 +68,7 @@ namespace Server
                                 Nick = ((BodyRegisterOrLogin)request.Data).Login,
                                 Password = ((BodyRegisterOrLogin)request.Data).Password
                             };
-                            Server.Database.SaveUserAsync(user);
+                            MakaoServerProtocol.Database.SaveUserAsync(user);
                             response=Response.CreateResponse("Register", "OK");
                         }
                         else
@@ -81,7 +81,7 @@ namespace Server
                 case "Login":
                     try
                     {
-                        user = await Server.Database.GetUserAsync(((BodyRegisterOrLogin)request.Data).Login);
+                        user = await MakaoServerProtocol.Database.GetUserAsync(((BodyRegisterOrLogin)request.Data).Login);
                         if (user != null)
                         {
                             if (user.Password == ((BodyRegisterOrLogin)request.Data).Password)
@@ -115,9 +115,9 @@ namespace Server
                 case "Create":
                     try
                     {
-                        Monitor.Enter(Server.croupiers);
+                        Monitor.Enter(MakaoServerProtocol.croupiers);
                         bool nameExsist = false;
-                        foreach(Croupier cr in Server.croupiers)
+                        foreach(Croupier cr in MakaoServerProtocol.croupiers)
                         {
                             if((string)request.Data == cr.NameTable)
                             {
@@ -129,11 +129,11 @@ namespace Server
                         {
                             Croupier croupier = new Croupier((string)request.Data, User);
                             Croupier = croupier;
-                            Server.croupiers.Add(croupier);
-                            response = Response.CreateResponse(request.Action, "OK", message: "Utworzyłeś stół do gry o nazwie: "+request.Data);
+                            MakaoServerProtocol.croupiers.Add(croupier);
+                            response = Response.CreateResponse(request.Action, "OK");
                         }else
                             response = Response.CreateResponse(request.Action, "WRONG",message: "Podana nazwa pokoju już jest zajęta.");
-                        Monitor.Exit(Server.croupiers);
+                        Monitor.Exit(MakaoServerProtocol.croupiers);
                     }
                     catch(Exception e)
                     {
@@ -144,15 +144,15 @@ namespace Server
                 case "List":
                     try
                     {
-                        Monitor.Enter(Server.croupiers);
-                        if (Server.croupiers.Count == 0)
+                        Monitor.Enter(MakaoServerProtocol.croupiers);
+                        if (MakaoServerProtocol.croupiers.Count == 0)
                         {
                             response = Response.CreateResponse("List", "WRONG", message: "Brak stolików z wolnymi miejscami.");
                         }
                         else
                         {
                             string list ="";
-                            foreach (var croupier in Server.croupiers)
+                            foreach (var croupier in MakaoServerProtocol.croupiers)
                             {
                                 if (croupier.FreeChairs)
                                 {
@@ -167,7 +167,7 @@ namespace Server
                             else
                                 response = Response.CreateResponse("List", "OK", list);
                         }
-                        Monitor.Exit(Server.croupiers);
+                        Monitor.Exit(MakaoServerProtocol.croupiers);
                     }catch( Exception e)
                     {
                         response = Response.CreateResponse("List", "ERROR", message: e.Message);
@@ -176,8 +176,9 @@ namespace Server
                 case "Join":
                     try
                     {
-                        Monitor.Enter(Server.croupiers);
-                        foreach (var croupier in Server.croupiers)
+                        Monitor.Enter(MakaoServerProtocol.croupiers);
+                        bool join = false;
+                        foreach (var croupier in MakaoServerProtocol.croupiers)
                         {
                             if (croupier.NameTable == (string)request.Data)
                             {
@@ -188,10 +189,13 @@ namespace Server
                                 }
                                 else
                                     response = Response.CreateResponse("Join", "WRONG", message: "Wybrany stolik już jest pełny.");
+                                join = true;
                                 break;
                             }
+                            if(!join)
+                                response = Response.CreateResponse("Join", "WRONG", message: "Wybrany stolik już nie istnieje.");
                         }
-                        Monitor.Exit(Server.croupiers);
+                        Monitor.Exit(MakaoServerProtocol.croupiers);
                     }
                     catch(Exception e)
                     {
@@ -220,10 +224,16 @@ namespace Server
                     }
                     break;
                 case "Take":
-                    Croupier.AddRequest(User, request);
+                    if(Croupier.FreeChairs)
+                        response = Response.CreateResponse(request.Action, "WRONG", message: "Gra jeszcze nie wystartowała.");
+                    else
+                        Croupier.AddRequest(User, request);
                     break;
                 case "Play":
-                    Croupier.AddRequest(User, request);
+                    if (Croupier.FreeChairs)
+                        response = Response.CreateResponse(request.Action, "WRONG", message: "Gra jeszcze nie wystartowała.");
+                    else
+                        Croupier.AddRequest(User, request);
                     break;
             }
             if(response != "")

@@ -32,12 +32,24 @@ namespace Server
                 body.Login = data.Split("Login:")[1].Split("\r\n")[0];
                 body.Password = data.Split("Password:")[1].Split("\r\n")[0];
                 Data = body;
+            }else if (Action == "Play")
+            {
+                BodyPlayCard bodyPlayCard = new BodyPlayCard();
+                bodyPlayCard.Card = data.Split("Card:")[1].Split("\r\n")[0];
+                if (data.Contains("Task:"))
+                    bodyPlayCard.Task = data.Split("Task:")[1].Split("\r\n")[0];
+                Data = bodyPlayCard;
             }
             else
             {
                 Data = data.Split("\r\n")[0];
             }
         }
+    }
+    public class BodyPlayCard
+    {
+        public string Card { get; set; }
+        public string Task { get; set; }
     }
     public class BodyRegisterOrLogin
     {

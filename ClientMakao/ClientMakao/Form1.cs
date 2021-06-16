@@ -19,7 +19,7 @@ namespace ClientMakao
         public Form1()
         {
             InitializeComponent();
-            SocketMenagment = new SocketMenagment("::1", 4000);
+            SocketMenagment = new SocketMenagment(Settings.IP, Settings.Port);
             ServerInfo.Text = SocketMenagment.StartConnect();
             backgroundWorkerThreadReceiveResponse.RunWorkerAsync();
         }
@@ -27,9 +27,10 @@ namespace ClientMakao
         {
             Response response;
             string string_response;
+            string rest ="";
             while (!backgroundWorkerThreadReceiveResponse.CancellationPending)
             {
-                string_response = SocketMenagment.ReceiveResponse();
+                (string_response,rest) = SocketMenagment.ReceiveResponse(rest);
                 if (string_response == null)
                     break;
                 response = new Response(string_response);
@@ -57,8 +58,10 @@ namespace ClientMakao
                         LeaveStatus(response);
                         break;
                     case "Take":
+                        TakeStatus(response);
                         break;
                     case "Play":
+                        PlayStatus(response);
                         break;
                     case "State":
                         StateStatus(response);
@@ -67,7 +70,38 @@ namespace ClientMakao
                         SetTextServerInfo("Serwer wysłał odpowiedź której nie znam.");
                         break;
                 }
+            }
+        }
 
+        private void PlayStatus(Response response)
+        {
+            switch (response.Status)
+            {
+                case "OK":
+                    SetListBoxCarts((string)response.Data, true);
+                    break;
+                case "WRONG":
+                    SetTextRich(response.Message);
+                    break;
+                case "ERROR":
+                    SetTextServerInfo(response.Message);
+                    break;
+            }
+        }
+
+        private void TakeStatus(Response response)
+        {
+            switch (response.Status)
+            {
+                case "OK":
+                    SetListBoxCarts((string)response.Data, false);
+                    break;
+                case "ERROR":
+                    SetTextServerInfo(response.Message);
+                    break;
+                case "WRONG":
+                    SetTextRich(response.Message);
+                    break;
             }
         }
         private void StateStatus(Response response)
@@ -76,10 +110,6 @@ namespace ClientMakao
             if(response.Message == "Odbieranie kart od graczy.")
             {
                 SetListBoxCarts("",true);
-            }else if(response.Message == "Twój ruch.")
-            {
-                ChangeEnabledButtonTakeCart();
-                ChangeEnabledButtonPlayCard();
             }
         }
         private void JoinStatus(Response response)
@@ -105,8 +135,10 @@ namespace ClientMakao
             {
                 case "OK":
                     SetTextServerInfo("Odszedłeś od stolika.");
+                    SetListBoxCarts("", true);
                     ChangeVisiblePanelGame();
                     ChangeVisiblePanelMenu();
+                    SetTextRich();
                     break;
                 case "ERROR":
                     SetTextServerInfo(response.Message);
@@ -139,7 +171,7 @@ namespace ClientMakao
                 case "OK":
                     ChangeVisiblePanelMenu();
                     ChangeVisiblePanelGame();
-                    SetTextServerInfo((string)response.Message);
+                    SetTextServerInfo("Utworzyłeś stół do gry.");
                     break;
                 case "ERROR":
                     SetTextServerInfo(response.Message);
@@ -215,7 +247,7 @@ namespace ClientMakao
         }
 
         delegate void SetTextRichCallBack(string text);
-        private void SetTextRich(string text)
+        private void SetTextRich(string text = null)
         {
             if (ServerInfo.InvokeRequired)
             {
@@ -223,25 +255,38 @@ namespace ClientMakao
                 Invoke(st, new object[] { text });
             }
             else
-                richTextMessages.Text += text + "\n"; 
+            {
+                if (text == null)
+                {
+                    richTextMessages.Text = "";
+                }
+                else
+                    richTextMessages.Text += text + "\n";
+            }
         }
 
         delegate void SetListBoxCartsCallBack(string cart, bool remove);
-        private void SetListBoxCarts(string cart, bool remove)
+        private void SetListBoxCarts(string cards, bool remove)
         {
             if (listBoxCart.InvokeRequired)
             {
                 SetListBoxCartsCallBack sl = new SetListBoxCartsCallBack(SetListBoxCarts);
-                Invoke(sl, new object[] { cart,remove });
+                Invoke(sl, new object[] { cards,remove });
             }
             else
             {
-                if (cart == "")
+                if (cards == "")
                     listBoxCart.Items.Clear();
                 else if (remove)
-                    listBoxCart.Items.Remove(cart);
+                    listBoxCart.Items.Remove(cards);
                 else
-                    listBoxCart.Items.Add(cart);
+                {
+                    string[] c = cards.Split(";");
+                    foreach(string s in c)
+                    {
+                        listBoxCart.Items.Add(s);
+                    }
+                }
             }
         }
 
@@ -352,12 +397,27 @@ namespace ClientMakao
 
         private void buttonPlayCart_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(listBoxCart.ValueMember))
+            if(listBoxCart.SelectedItem != null)
             {
-                SocketMenagment.SendRequest(Request.PlayCard(listBoxCart.ValueMember, Token));
+                switch (listBoxCart.SelectedItem.ToString().Split(" ")[0])
+                {
+                    case "As":
+                        if(listBoxColor.SelectedItem != null)
+                        {
+                            SocketMenagment.SendRequest(Request.PlayCard(listBoxCart.SelectedItem.ToString(), Token,task: listBoxColor.SelectedItem.ToString()));
+                        }
+                        break;
+                    case "Walet":
+                        if(listBoxCardOnWalet.SelectedItem != null)
+                        {
+                            SocketMenagment.SendRequest(Request.PlayCard(listBoxCart.SelectedItem.ToString(), Token,task: listBoxCardOnWalet.SelectedItem.ToString()));
+                        }
+                        break;
+                    default:
+                        SocketMenagment.SendRequest(Request.PlayCard(listBoxCart.SelectedItem.ToString(),Token));
+                        break;
+                }
             }
-        }
-
-        
+        }   
     }
 }

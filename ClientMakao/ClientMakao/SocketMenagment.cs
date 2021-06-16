@@ -51,26 +51,30 @@ namespace ClientMakao
                 return false;
             }
         }
-        public string ReceiveResponse()
+        public (string, string) ReceiveResponse(string rest)
         {
             try
             {
                 byte[] buffer = new byte[1024];
-                string msg = "";
-                int len = 0;
+                string msg = rest;
+                int len;
                 while (!msg.Contains("\r\n\r\n"))
                 {
                     len = socket.Receive(buffer);
                     msg += Encoding.UTF8.GetString(buffer.Take(len).ToArray());
                 }
-                Console.WriteLine(msg);
-                return msg;
+                return ParseRecevedData(msg);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                return null;
+                return (null, rest);
             }
+        }
+        private (string, string) ParseRecevedData(string data)
+        {
+            string msg = data.Split("\r\n\r\n")[0]+"\r\n\r\n";
+            string rest = data.Remove(0,msg.Length);
+            return (msg,rest);
         }
 
     }
