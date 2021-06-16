@@ -13,7 +13,7 @@ Są to karty: 5, 6, 7, 8, 9, 10 oraz Król Karo i Król Trefl.
 * 3 - Wymusza na następnym graczu dobranie 3 kart. (Jeśli można tyle pobrać).
 * 4 - Wymusza na następnym graczu dobranie 4 kart. (Jeśli można tyle pobrać).
 * Król Pik i Król Kier - Wymuszają na następnym graczu dobranie 5 kart. (Jeśli można tyle pobrać).
-* Walet - Wymusza na następnym graczu zagranie karty od 5 do 10. Lub dobraniu karty.
+* Walet - Wymusza na wszystkich graczach zagranie karty którą wybiera ( od 5 do 10) lub dobraniu karty.
 * Dama - Dama na wszystko, wszystko na dame.
 * As - Wymusza zmianę koloru.
 
