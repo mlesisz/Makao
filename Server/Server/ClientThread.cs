@@ -14,19 +14,11 @@ namespace Server
     {
         public Socket Socket { get; set; }
         protected string Token { get; set; }
-        public DataLog DataLog { get; set; }
         private User User { get; set;}
         private Croupier Croupier { get; set; }
         public ClientThread(Socket socket)
         {
             Socket = socket;
-            DataLog = new DataLog()
-            {
-                Host = ((IPEndPoint)Socket.RemoteEndPoint).Address.ToString(),
-                Port = ((IPEndPoint)Socket.RemoteEndPoint).Port,
-                Message = "",
-                Action = ""
-            };
         }
         public Request GetRequest()
         {
@@ -40,20 +32,19 @@ namespace Server
                     len = Socket.Receive(buffer);
                     msg += Encoding.UTF8.GetString(buffer.Take(len).ToArray());
                 }
-                Console.WriteLine(msg);
+                //Console.WriteLine(msg);
                 return new Request(msg);
             }
             catch (Exception e)
             {
-                DataLog.Message = e.Message;
-                Logs.Error(DataLog);
+                string host = "" + ((IPEndPoint)Socket.RemoteEndPoint).Address.ToString() + ":" + ((IPEndPoint)Socket.RemoteEndPoint).Port;
+                Logging.ERROR(message: e.Message, host: host);
                 return null;
             }
         }
 
         public async Task  RequestHandling(Request request)
         {
-            string response ="";
             User user;
             switch (request.Action)
             {
@@ -69,13 +60,13 @@ namespace Server
                                 Password = ((BodyRegisterOrLogin)request.Data).Password
                             };
                             MakaoServerProtocol.Database.SaveUserAsync(user);
-                            response=Response.CreateResponse("Register", "OK");
+                            Response.SendResponse(Socket,"Register", "OK");
                         }
                         else
-                            response = Response.CreateResponse("Register", "WRONG", message: "Podany login jest zajęty.");
+                            Response.SendResponse(Socket,"Register", "WRONG", message: "Podany login jest zajęty.");
                     } catch ( Exception e)
                     {
-                        response = Response.CreateResponse("Register", "ERROR", message: e.Message);
+                        Response.SendResponse(Socket,"Register", "ERROR", message: e.Message);
                     }
                     break;
                 case "Login":
@@ -87,19 +78,19 @@ namespace Server
                             if (user.Password == ((BodyRegisterOrLogin)request.Data).Password)
                             {
                                 Token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
-                                response = Response.CreateResponse("Login", "OK", Token);
+                                Response.SendResponse(Socket,"Login", "OK", Token);
                                 user.Socket = Socket;
                                 User = user;
                             }
                             else
-                                response = Response.CreateResponse("Login", "WRONG", message: "Błędne dane logowania.");
+                                Response.SendResponse(Socket,"Login", "WRONG", message: "Błędne dane logowania.");
                         }
                         else
-                            response = Response.CreateResponse("Login", "WRONG", message: "Błędne dane logowania.");
+                            Response.SendResponse(Socket,"Login", "WRONG", message: "Błędne dane logowania.");
                     }
                     catch (Exception e)
                     {
-                        response = Response.CreateResponse("Login", "ERROR", message: e.Message);
+                        Response.SendResponse(Socket,"Login", "ERROR", message: e.Message);
                     }
                     
                     break;
@@ -110,7 +101,7 @@ namespace Server
                         Croupier.AddRequest(User, new Request() { Action = "Leave" });
                     }
                     User = null;
-                    response = Response.CreateResponse("Logout","OK");
+                    Response.SendResponse(Socket,"Logout","OK");
                     break;
                 case "Create":
                     try
@@ -130,14 +121,14 @@ namespace Server
                             Croupier croupier = new Croupier((string)request.Data, User);
                             Croupier = croupier;
                             MakaoServerProtocol.croupiers.Add(croupier);
-                            response = Response.CreateResponse(request.Action, "OK");
+                            Response.SendResponse(Socket,request.Action, "OK");
                         }else
-                            response = Response.CreateResponse(request.Action, "WRONG",message: "Podana nazwa pokoju już jest zajęta.");
+                            Response.SendResponse(Socket,request.Action, "WRONG",message: "Podana nazwa pokoju już jest zajęta.");
                         Monitor.Exit(MakaoServerProtocol.croupiers);
                     }
                     catch(Exception e)
                     {
-                        response = Response.CreateResponse(request.Action, "ERROR",message: e.Message);
+                        Response.SendResponse(Socket,request.Action, "ERROR",message: e.Message);
                     }
                     
                     break;
@@ -147,7 +138,7 @@ namespace Server
                         Monitor.Enter(MakaoServerProtocol.croupiers);
                         if (MakaoServerProtocol.croupiers.Count == 0)
                         {
-                            response = Response.CreateResponse("List", "WRONG", message: "Brak stolików z wolnymi miejscami.");
+                            Response.SendResponse(Socket,"List", "WRONG", message: "Brak stolików z wolnymi miejscami.");
                         }
                         else
                         {
@@ -163,14 +154,14 @@ namespace Server
                                 }
                             }
                             if (list == "")
-                                response = Response.CreateResponse("List", "WRONG", message: "Brak stolików z wolnymi miejscami.");
+                                Response.SendResponse(Socket,"List", "WRONG", message: "Brak stolików z wolnymi miejscami.");
                             else
-                                response = Response.CreateResponse("List", "OK", list);
+                                Response.SendResponse(Socket,"List", "OK", list);
                         }
                         Monitor.Exit(MakaoServerProtocol.croupiers);
                     }catch( Exception e)
                     {
-                        response = Response.CreateResponse("List", "ERROR", message: e.Message);
+                        Response.SendResponse(Socket,"List", "ERROR", message: e.Message);
                     }
                     break;
                 case "Join":
@@ -185,21 +176,21 @@ namespace Server
                                 if (croupier.Join(User))
                                 {
                                     Croupier = croupier;
-                                    response = Response.CreateResponse("Join", "OK", message: "Dołączyłeś do stolika: "+croupier.NameTable);
+                                    Response.SendResponse(Socket,"Join", "OK", message: "Dołączyłeś do stolika: "+croupier.NameTable);
                                 }
                                 else
-                                    response = Response.CreateResponse("Join", "WRONG", message: "Wybrany stolik już jest pełny.");
+                                    Response.SendResponse(Socket,"Join", "WRONG", message: "Wybrany stolik już jest pełny.");
                                 join = true;
                                 break;
                             }
                             if(!join)
-                                response = Response.CreateResponse("Join", "WRONG", message: "Wybrany stolik już nie istnieje.");
+                                Response.SendResponse(Socket,"Join", "WRONG", message: "Wybrany stolik już nie istnieje.");
                         }
                         Monitor.Exit(MakaoServerProtocol.croupiers);
                     }
                     catch(Exception e)
                     {
-                        response = Response.CreateResponse("Join", "ERROR", message: e.Message);
+                        Response.SendResponse(Socket,"Join", "ERROR", message: e.Message);
                     }
                     
                     break;
@@ -209,35 +200,33 @@ namespace Server
                         Monitor.Enter(Croupier);
                         if (Croupier.Leave(User))
                         {
-                            response = Response.CreateResponse(request.Action,"OK");
+                            Response.SendResponse(Socket,request.Action,"OK");
                             Monitor.Exit(Croupier);
                             Croupier = null;
                         }
                         else
                         {
                             Monitor.Exit(Croupier);
-                            response = Response.CreateResponse(request.Action, "WRONG", message: "Próba opuszczenia pokoju nie powiodła się.");
+                            Response.SendResponse(Socket,request.Action, "WRONG", message: "Próba opuszczenia pokoju nie powiodła się.");
                         }
                     }catch(Exception e)
                     {
-                        response = Response.CreateResponse("Leave", "ERROR", message: e.Message);
+                        Response.SendResponse(Socket,"Leave", "ERROR", message: e.Message);
                     }
                     break;
                 case "Take":
                     if(Croupier.FreeChairs)
-                        response = Response.CreateResponse(request.Action, "WRONG", message: "Gra jeszcze nie wystartowała.");
+                         Response.SendResponse(Socket,request.Action, "WRONG", message: "Gra jeszcze nie wystartowała.");
                     else
                         Croupier.AddRequest(User, request);
                     break;
                 case "Play":
                     if (Croupier.FreeChairs)
-                        response = Response.CreateResponse(request.Action, "WRONG", message: "Gra jeszcze nie wystartowała.");
+                        Response.SendResponse(Socket,request.Action, "WRONG", message: "Gra jeszcze nie wystartowała.");
                     else
                         Croupier.AddRequest(User, request);
                     break;
             }
-            if(response != "")
-                Response.SendResponse(Socket,response);
         }
 
         public void Run()
@@ -249,19 +238,30 @@ namespace Server
                     Request request = GetRequest();
                     if (request != null)
                     {
-                        if (request.Action == "End") break;
+                        if (request.Action == "End")
+                        {
+                            string host = "" + ((IPEndPoint)Socket.RemoteEndPoint).Address.ToString() + ":" + ((IPEndPoint)Socket.RemoteEndPoint).Port;
+                            if(Croupier != null)
+                            {
+                                Croupier.Leave(User);
+                                Croupier = null;
+                            }
+                            Logging.Info("Host "+host+ " terminated the connection.");
+                            break;
+                        }
                         if (request.Token == Token)
                             RequestHandling(request);
                         else
-                            Response.SendResponse(Socket,Response.CreateResponse(request.Action, "ERROR", message: "Podany Token jest nie prawidłowy"));
+                            Response.SendResponse(Socket,request.Action, "ERROR", message: "Podany Token jest nie prawidłowy");
                     }
                     else
                         break;
                 }
                 catch (Exception e)
                 {
-                    DataLog.Message = e.Message;
-                    Logs.Error(DataLog);
+                    
+                    string host = ""+ ((IPEndPoint)Socket.RemoteEndPoint).Address.ToString()+":"+((IPEndPoint)Socket.RemoteEndPoint).Port;
+                    Logging.ERROR(message: e.Message,host: host);
                 }
             }
             Socket.Close();

@@ -36,16 +36,16 @@ namespace Server
         }
         private void StartGame()
         {
+            RequestGame.Clear();
             CardsPlayed.Clear();
             CardsToBeDealt.Clear();
-            SendGameStatusToPlayers(Response.CreateResponse("State",message: "Wszystkie miesjca przy stoliku zajęte. Rozpoczęto tasowanie kart."));
+            SendGameStatusToPlayers(message: "Wszystkie miesjca przy stoliku zajęte. Rozpoczęto tasowanie kart.");
             CardShuffling();
             DealTheCarts();
             playermovment = 0;
             while (true)
             {
-                SendGameStatusToPlayers(Response.CreateResponse("State", message: 
-                    "Karta: "+CardsToBeDealt.First()));
+                SendGameStatusToPlayers(message: "Karta: "+CardsToBeDealt.First());
                 CardsPlayed.Add(CardsToBeDealt.First());
                 if (NonFunctionalCards(CardsToBeDealt.First()))
                 {
@@ -58,7 +58,7 @@ namespace Server
         }
         private void Run()
         {
-            Response.SendResponse(users[playermovment].Socket, Response.CreateResponse("State",message: "Twój ruch."));
+            Response.SendResponse(users[playermovment].Socket,"State",message: "Twój ruch.");
             while (users[0]!= null && users[1] != null && users[2] != null)
             {
                 
@@ -67,12 +67,12 @@ namespace Server
                 CheckPlayerMovment();
                 if(users[playermovment].Cards.Count == 0)
                 {
-                    SendGameStatusToPlayers(Response.CreateResponse("State", message: "Te rozdanie wygrał: "+ users[playermovment].Nick));
+                    SendGameStatusToPlayers( message: "Te rozdanie wygrał: "+ users[playermovment].Nick);
                     break;
                 }
                 Thread.Sleep(1000);
             }
-            SendGameStatusToPlayers(Response.CreateResponse("State", message: "Odbieranie kart od graczy."));
+            SendGameStatusToPlayers( message: "Odbieranie kart od graczy.");
             foreach(User user in users)
             {
                 if (user != null)
@@ -96,7 +96,7 @@ namespace Server
                     {
                         if(index != playermovment)
                         {
-                            Response.SendResponse(user.Socket, Response.CreateResponse(request.Action, "WRONG", message: "To nie jest twoja kolej."));
+                            Response.SendResponse(user.Socket, request.Action, "WRONG", message: "To nie jest twoja kolej.");
                             break;
                         }
 
@@ -126,8 +126,7 @@ namespace Server
                                     }
                                     else
                                     {
-                                        Response.SendResponse(users[index].Socket, Response.CreateResponse(request.Action, "WRONG", 
-                                            message: "Musisz zagrać karte o kolorze: "+ fc.Color));
+                                        Response.SendResponse(users[index].Socket, request.Action, "WRONG",  message: "Musisz zagrać karte o kolorze: "+ fc.Color);
                                     }
                                 }
                                 else
@@ -156,8 +155,7 @@ namespace Server
                                     }
                                     else
                                     {
-                                        Response.SendResponse(users[index].Socket, Response.CreateResponse(request.Action, "WRONG",
-                                            message: "Musisz zagrać karte o numerze: " + fc.Number));
+                                        Response.SendResponse(users[index].Socket, request.Action, "WRONG",message: "Musisz zagrać karte o numerze: " + fc.Number);
                                     }
                                 }else
                                 {
@@ -170,8 +168,8 @@ namespace Server
                                 ForcMovementTake ft = users[index].ForcMovement as ForcMovementTake;
                                 if (request.Action == "Play")
                                 {
-                                    Response.SendResponse(users[index].Socket, Response.CreateResponse(request.Action, "WRONG",
-                                            message: "Musisz dobrać " + ft.Number + " karty."));
+                                    Response.SendResponse(users[index].Socket,request.Action, "WRONG",
+                                            message: "Musisz dobrać " + ft.Number + " karty.");
                                 }
                                 else
                                 {
@@ -186,9 +184,9 @@ namespace Server
                                         data += ";" + CardsToBeDealt.First();
                                         CardsToBeDealt.RemoveAt(0);
                                     }
-                                    Response.SendResponse(users[index].Socket, Response.CreateResponse(request.Action, "OK",
-                                            data: data));
-                                    SendGameStatusToPlayers(Response.CreateResponse("State",message: "Gracz " + users[index].Nick + "dobrał " + ft.Number + " karty."));
+                                    Response.SendResponse(users[index].Socket,request.Action, "OK",
+                                            data: data);
+                                    SendGameStatusToPlayers(message: "Gracz " + users[index].Nick + "dobrał " + ft.Number + " karty.");
                                     users[index].ForcMovement = null;
                                     NextMove();
                                 }
@@ -216,7 +214,7 @@ namespace Server
                                     }
                                     else
                                     {
-                                        Response.SendResponse(users[index].Socket, Response.CreateResponse(request.Action, "WRONG", data: body.Card,message: "Nie możesz zagrać tej karty."));
+                                        Response.SendResponse(users[index].Socket, request.Action, "WRONG", data: body.Card,message: "Nie możesz zagrać tej karty.");
                                     }
                                     break;
                             }
@@ -264,7 +262,7 @@ namespace Server
         }
         private void SendMessqgeToPlayer(Socket socket, string message)
         {
-            Response.SendResponse(socket,Response.CreateResponse("State", message: message));
+            Response.SendResponse(socket,"State", message: message);
         }
         private bool PlayerTakeCard (int index, Request request)
         {
@@ -275,15 +273,15 @@ namespace Server
             if (CardsToBeDealt.Count > 0)
             {
                 users[index].Cards.Add(CardsToBeDealt.First());
-                Response.SendResponse(users[index].Socket, Response.CreateResponse(request.Action, "OK", data: CardsToBeDealt.First()));
-                SendGameStatusToPlayers(Response.CreateResponse("State", message: "Gracz " + users[index].Nick + " pobrał kartę."));
+                Response.SendResponse(users[index].Socket, request.Action, "OK", data: CardsToBeDealt.First());
+                SendGameStatusToPlayers( message: "Gracz " + users[index].Nick + " pobrał kartę.");
                 CardsToBeDealt.RemoveAt(0);
                 NextMove();
                 return true;
             }
             else
             {
-                Response.SendResponse(users[index].Socket, Response.CreateResponse(request.Action, "WRONG", message: "Brak wolnych kart do pobrania."));
+                Response.SendResponse(users[index].Socket,request.Action, "WRONG", message: "Brak wolnych kart do pobrania.");
                 return false;
             }
         }
@@ -292,14 +290,14 @@ namespace Server
             BodyPlayCard body = request.Data as BodyPlayCard;
             if (users[index].Cards.Remove(body.Card))
             {
-                Response.SendResponse(users[index].Socket, Response.CreateResponse(request.Action, "OK",data: body.Card));
-                SendGameStatusToPlayers(Response.CreateResponse("State", message: "Gracz " + users[index].Nick + " zagrał kartę " + body.Card));
+                Response.SendResponse(users[index].Socket, request.Action, "OK",data: body.Card);
+                SendGameStatusToPlayers( message: "Gracz " + users[index].Nick + " zagrał kartę " + body.Card);
                 CardsPlayed.Add(body.Card);
                 return true;
             }
             else
             {
-                Response.SendResponse(users[index].Socket, Response.CreateResponse(request.Action, "ERROR", message: "Błąd w rozgrywce. Serwer nie widzi tej karty w twojej ręce."));
+                Response.SendResponse(users[index].Socket,request.Action, "ERROR", message: "Błąd w rozgrywce. Serwer nie widzi tej karty w twojej ręce.");
                 return false;
             }
         }
@@ -359,8 +357,7 @@ namespace Server
         private void NextMove()
         {
             playermovment = NextPlayer();
-            Response.SendResponse(users[playermovment].Socket,
-                Response.CreateResponse("State", message: "Twój ruch."));
+            Response.SendResponse(users[playermovment].Socket,"State", message: "Twój ruch.");
         }
         private void DealTheCarts()
         {
@@ -382,7 +379,7 @@ namespace Server
             {
                 cards += ";" + user.Cards[i];
             }
-            Response.SendResponse(user.Socket, Response.CreateResponse("Take", "OK", cards));
+            Response.SendResponse(user.Socket, "Take", "OK", cards);
         }
         private void CardShuffling()
         {
@@ -399,12 +396,12 @@ namespace Server
                 c.RemoveAt(numberCart);
             }
         }
-        public void SendGameStatusToPlayers(string response)
+        public void SendGameStatusToPlayers( string status = "", string data = "", string message = "")
         {
             foreach(User user in users)
             {
                 if (user != null)
-                    Response.SendResponse(user.Socket, response);
+                    Response.SendResponse(user.Socket, action: "State",status,data,message);
             }
         }
         public bool Join(User user)
@@ -413,7 +410,7 @@ namespace Server
             {
                 if(users[i]== null)
                 {
-                    SendGameStatusToPlayers(Response.CreateResponse("State", message: "Gracz " + user.Nick + " dosiadł się do stołu."));
+                    SendGameStatusToPlayers( message: "Gracz " + user.Nick + " dosiadł się do stołu.");
                     users[i] = user;
                     if (users[0] != null && users[1] != null && users[2] != null)
                     {
@@ -434,7 +431,7 @@ namespace Server
                 {
                     users[i] = null;
                     FreeChairs = true;
-                    SendGameStatusToPlayers(Response.CreateResponse("State",message: "Gracz "+ user.Nick + " odszedł od stołu."));
+                    SendGameStatusToPlayers(message: "Gracz "+ user.Nick + " odszedł od stołu.");
                     RemoveFromListServer();
                     return true;
                 }

@@ -28,7 +28,7 @@ namespace Server
             {
                 if (database == null)
                 {
-                    database = new Database(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Db_Makao.db3"));
+                    database = new Database(Path.Combine(Environment.CurrentDirectory, "Db_Makao.db3"));
                 }
                 return database;
             }
@@ -46,6 +46,7 @@ namespace Server
         public void Run()
         {
             var socket = GetSocket();
+            Logging.Info("The server started on the address " + Address+" and port "+Port);
             while (true)
             {
                 try
@@ -56,17 +57,11 @@ namespace Server
 
                     thread.Start();
 
-                    DataLog dataLog = new()
-                    {
-                        Host = ((IPEndPoint)connection.RemoteEndPoint).Address.ToString(),
-                        Port = ((IPEndPoint)connection.RemoteEndPoint).Port,
-                        Message = "Connected to the host.",
-                    };
-                    Logs.Info(dataLog);
+                    Logging.Info("The server accepted the connection and created a new thread for it.");
                 }
                 catch (Exception e)
                 {
-                    Logs.Error(new DataLog() { Message = e.Message });
+                    Logging.ERROR(message: e.Message);
                     Console.WriteLine(e);
                 }
             }
