@@ -1,17 +1,446 @@
-18.06.2021 12:01:33 | The server started on the address ::1 and port 4000
-18.06.2021 12:13:12 | The server accepted the connection and created a new thread for it.
-18.06.2021 12:13:17 | ::1:53616 Login: WRONG - Błędne dane logowania.
-18.06.2021 12:13:24 | ::1:53616 Register: OK - 
-18.06.2021 12:13:30 | ::1:53616 Login: OK - 
-18.06.2021 12:13:31 | ::1:53616 List: WRONG - Brak stolików z wolnymi miejscami.
-18.06.2021 12:13:44 | ::1:53616 Logout: OK - 
-18.06.2021 12:21:25 | The server started on the address ::1 and port 4000
-18.06.2021 12:21:36 | The server accepted the connection and created a new thread for it.
-18.06.2021 12:21:41 | ::1:53627 Login: 4pDMUy3XyU+dp3+HoTOyoQ== OK - 
-18.06.2021 12:21:43 | ::1:53627 List:  WRONG - Brak stolików z wolnymi miejscami.
-18.06.2021 12:21:46 | ::1:53627 Logout:  OK - 
-18.06.2021 12:25:54 | The server started on the address ::1 and port 4000
-18.06.2021 12:26:05 | The server accepted the connection and created a new thread for it.
-18.06.2021 12:26:11 | ::1:53647 Login: OK - 
-18.06.2021 12:26:13 | ::1:53647 Logout: OK - 
-18.06.2021 12:26:15 | Host ::1:53647 terminated the connection.
+18.06.2021 14:57:03 | The server started on the address ::1 and port 4000
+18.06.2021 14:57:09 | The server accepted the connection and created a new thread for it.
+18.06.2021 14:57:14 | ::1:57556 Login: WRONG - Błędne dane logowania.
+18.06.2021 14:57:20 | ::1:57556 Register: OK - 
+18.06.2021 14:57:26 | ::1:57556 Login: OK - 
+18.06.2021 14:57:27 | ::1:57556 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 14:57:30 | ::1:57556 Create: OK - 
+18.06.2021 14:57:33 | ::1:57556 Leave: OK - 
+18.06.2021 14:57:34 | ::1:57556 Logout: OK - 
+18.06.2021 14:59:19 | ::1:57556 Login: OK - 
+18.06.2021 14:59:26 | ::1:57556 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 14:59:27 | ::1:57556 Create: OK - 
+18.06.2021 14:59:29 | ::1:57556 Leave: OK - 
+18.06.2021 14:59:30 | ::1:57556 Logout: OK - 
+18.06.2021 14:59:31 | Host ::1:57556 terminated the connection.
+18.06.2021 15:01:54 | The server started on the address ::1 and port 4000
+18.06.2021 15:01:57 | The server accepted the connection and created a new thread for it.
+18.06.2021 15:02:19 | ::1:57565 Login: OK - 
+18.06.2021 15:08:34 | ::1:57565 Logout: OK - 
+18.06.2021 15:08:35 | Host ::1:57565 terminated the connection.
+18.06.2021 15:17:51 | The server started on the address ::1 and port 4000
+18.06.2021 15:17:59 | The server accepted the connection and created a new thread for it.
+18.06.2021 15:18:04 | ::1:57616 Login: OK - 
+18.06.2021 15:18:04 | ::1:57616 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:18:06 | ::1:57616 Create: OK - 
+18.06.2021 15:18:09 | The server accepted the connection and created a new thread for it.
+18.06.2021 15:18:14 | ::1:57617 Register: OK - 
+18.06.2021 15:18:22 | ::1:57617 Login: OK - 
+18.06.2021 15:18:23 | ::1:57617 List: OK - 
+18.06.2021 15:18:24 | ::1:57616 State: OK - Gracz test1 dosiadł się do stołu.
+18.06.2021 15:18:24 | ::1:57617 Join: OK - Dołączyłeś do stolika: aa
+18.06.2021 15:18:30 | ::1:57616 State: OK - Gracz test1 odszedł od stołu.
+18.06.2021 15:18:30 | ::1:57617 Leave: OK - 
+18.06.2021 15:18:32 | ::1:57617 List: OK - 
+18.06.2021 15:18:40 | ::1:57617 Logout: OK - 
+18.06.2021 15:18:42 | Host ::1:57617 terminated the connection.
+18.06.2021 15:18:45 | Host ::1:57616 terminated the connection.
+18.06.2021 15:40:27 | The server started on the address ::1 and port 4000
+18.06.2021 15:41:22 | The server accepted the connection and created a new thread for it.
+18.06.2021 15:41:28 | Client send request: Action:Login
+Data:Login:test
+Password:test
+
+
+18.06.2021 15:41:28 | ::1:57756 Login: OK - 
+18.06.2021 15:41:30 | Client send request: Action:List
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:30 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:41:30 | Client send request: Action:List
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:30 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:41:30 | Client send request: Action:List
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:30 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:41:30 | Client send request: Action:List
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:30 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:41:30 | Client send request: Action:List
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:30 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:41:30 | Client send request: Action:List
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:30 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:41:31 | Client send request: Action:List
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:31 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:41:31 | Client send request: Action:List
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:31 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:41:31 | Client send request: Action:List
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:31 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:41:35 | Client send request: Action:Create
+Token:fzLmbICepU2Fwdz0BzCYWA==
+Data:asd
+
+
+18.06.2021 15:41:35 | ::1:57756 Create: OK - 
+18.06.2021 15:41:36 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:36 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:36 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:36 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:37 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:37 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:37 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:37 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:37 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:37 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:37 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:37 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:37 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:37 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:37 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:37 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:38 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:38 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:38 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:38 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:38 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:38 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:38 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:38 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:38 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:38 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:38 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:38 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:39 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:39 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:39 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:39 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:39 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:39 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:39 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:39 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:39 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:39 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:39 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:39 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:39 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:39 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:40 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:40 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:40 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:40 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:40 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:40 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:40 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:40 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:40 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:40 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:40 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:40 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:40 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:40 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:41 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:41 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:41 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:41 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:41 | Client send request: Action:Take
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:41 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:41:42 | Client send request: Action:Leave
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:42 | ::1:57756 Leave: OK - 
+18.06.2021 15:41:43 | Client send request: Action:List
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:43 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:41:44 | Client send request: Action:Create
+Token:fzLmbICepU2Fwdz0BzCYWA==
+Data:asd
+
+
+18.06.2021 15:41:44 | ::1:57756 Create: OK - 
+18.06.2021 15:41:49 | Client send request: Action:Leave
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:49 | ::1:57756 Leave: OK - 
+18.06.2021 15:41:51 | Client send request: Action:Logout
+Token:fzLmbICepU2Fwdz0BzCYWA==
+
+
+18.06.2021 15:41:51 | ::1:57756 Logout: OK - 
+18.06.2021 15:42:01 | Client send request: Action:Login
+Data:Login:test3
+Password:test3
+
+
+18.06.2021 15:42:01 | ::1:57756 Login: WRONG - Błędne dane logowania.
+18.06.2021 15:42:11 | Client send request: Action:Register
+Data:Login:test3
+Password:test3
+
+
+18.06.2021 15:42:12 | ::1:57756 Register: OK - 
+18.06.2021 15:42:20 | Client send request: Action:Login
+Data:Login:test3
+Password:test3
+
+
+18.06.2021 15:42:20 | ::1:57756 Login: OK - 
+18.06.2021 15:42:22 | Client send request: Action:List
+Token:JCKLkaviy0qNvGGBa9gSNw==
+
+
+18.06.2021 15:42:22 | ::1:57756 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:42:23 | Client send request: Action:Create
+Token:JCKLkaviy0qNvGGBa9gSNw==
+Data:asd
+
+
+18.06.2021 15:42:23 | ::1:57756 Create: OK - 
+18.06.2021 15:42:34 | Client send request: Action:Leave
+Token:JCKLkaviy0qNvGGBa9gSNw==
+
+
+18.06.2021 15:42:34 | ::1:57756 Leave: OK - 
+18.06.2021 15:43:21 | Client send request: Action:Create
+Token:JCKLkaviy0qNvGGBa9gSNw==
+Data:asd
+
+
+18.06.2021 15:43:21 | ::1:57756 Create: OK - 
+18.06.2021 15:43:44 | Client send request: Action:Take
+Token:JCKLkaviy0qNvGGBa9gSNw==
+
+
+18.06.2021 15:43:44 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:43:46 | Client send request: Action:Take
+Token:JCKLkaviy0qNvGGBa9gSNw==
+
+
+18.06.2021 15:43:46 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:43:55 | Client send request: Action:Take
+Token:JCKLkaviy0qNvGGBa9gSNw==
+
+
+18.06.2021 15:43:55 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:45:09 | Client send request: Action:Take
+Token:JCKLkaviy0qNvGGBa9gSNw==
+
+
+18.06.2021 15:46:03 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:46:43 | Client send request: Action:Take
+Token:JCKLkaviy0qNvGGBa9gSNw==
+
+
+18.06.2021 15:46:46 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:46:46 | Client send request: Action:Take
+Token:JCKLkaviy0qNvGGBa9gSNw==
+
+
+18.06.2021 15:46:47 | ::1:57756 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:46:58 | Client send request: Action:Leave
+Token:JCKLkaviy0qNvGGBa9gSNw==
+
+
+18.06.2021 15:47:05 | ::1:57756 Leave: OK - 
+18.06.2021 15:47:08 | Client send request: Action:Logout
+Token:JCKLkaviy0qNvGGBa9gSNw==
+
+
+18.06.2021 15:47:08 | ::1:57756 Logout: OK - 
+18.06.2021 15:47:11 | Client send request: Action:End
+
+
+18.06.2021 15:47:11 | Host ::1:57756 terminated the connection.
+18.06.2021 15:51:27 | The server started on the address ::1 and port 4000
+18.06.2021 15:52:10 | The server started on the address ::1 and port 4000
+18.06.2021 15:52:16 | The server accepted the connection and created a new thread for it.
+18.06.2021 15:52:21 | ::1:57777 send request: Action:Login
+Data:Login:test
+Password:test
+
+
+18.06.2021 15:52:22 | ::1:57777 Login: OK - 
+18.06.2021 15:52:23 | ::1:57777 send request: Action:List
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:23 | ::1:57777 List: WRONG - Brak stolików z wolnymi miejscami.
+18.06.2021 15:52:26 | ::1:57777 send request: Action:Create
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+Data:ala
+
+
+18.06.2021 15:52:26 | ::1:57777 Create: OK - 
+18.06.2021 15:52:27 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:27 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:28 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:28 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:28 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:28 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:28 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:28 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:28 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:28 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:28 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:28 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:28 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:28 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:28 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:28 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:29 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:29 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:29 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:29 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:29 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:29 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:29 | ::1:57777 send request: Action:Take
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:29 | ::1:57777 Take: WRONG - Gra jeszcze nie wystartowała.
+18.06.2021 15:52:32 | ::1:57777 send request: Action:Leave
+Token:+Gtp55pMf0uOMcTuDfnY2Q==
+
+
+18.06.2021 15:52:32 | ::1:57777 Leave: OK - 
