@@ -107,3 +107,7 @@ Przykładowa wiadomość od serwera: `Action:State\r\nMessage:Gracz test2 pobra�
 Aplikacja klienta została wyłączona przez użytkownika i przesyła ostatnią wiadomość o rozłączeniu.
 
 Przykładowy request: `Action:End\r\n\r\n`
+
+Wizualizacja działania serwera.
+
+![alt text](https://github.com/mlesisz/Makao/blob/main/request_handling.png?raw=true)
