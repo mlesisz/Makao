@@ -104,7 +104,7 @@ Serwer przesyła informacje o aktualnym stanie gry.
 
 Przykładowa wiadomość od serwera: `Action:State\r\nMessage:Gracz test2 pobrał kartę.\r\n\r\n`
 ### End
-Aplikacja klienta została wyłączona przez użytkownika i przesyła ostatnią wiadomość o rozłączeniu.
+Aplikacja klienta została wyłączona przez użytkownika i przesyła ostatnią wiadomość przed rozłączeniem.
 
 Przykładowy request: `Action:End\r\n\r\n`
 
