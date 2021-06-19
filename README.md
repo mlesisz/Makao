@@ -1,9 +1,10 @@
 ## Jak uruchomić (testowałem tylko na Windowsie)
-Wymagania:
-* .net SDK > 5.0
+Wymagania: .net SDK > 5.0
 
 * Klonujemy/pobieramy repozytorium
 * Pobieramy/aktualizujemy dla swojej platformy .net 5.0 SDK https://dotnet.microsoft.com/download
+
+IP oraz port można zmienić u serwera i kilenta w pliku settings.
 
 Uruchomienie serwera
   * Przechodzimy do np. D:\Studia\Programowanie aplikacji sieciowych\Makao\Server\Server 
