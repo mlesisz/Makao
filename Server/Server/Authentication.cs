@@ -10,8 +10,8 @@ namespace Server
 {
     public class Authentication
     {
-        private static string key { get; set; } = "ala ma kota";
-        private static string Encrypt(string text)
+        private static string salt{ get; set; } = "R2estyd##2rtso";
+        /*private static string Encrypt(string text)
         {
             using (var md5 = new MD5CryptoServiceProvider())
             {
@@ -29,8 +29,15 @@ namespace Server
                     }
                 }
             }
+        }*/
+        private string CreateHash(string password)
+        {
+            using (var md5 = MD5.Create())
+            {
+                byte[] bytes = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(salt+password));
+                return BitConverter.ToString(bytes).Replace("-", "");
+            }
         }
-
         public async Task<bool> Register(string login, string password)
         {
             User user = await MakaoServerProtocol.Database.GetUserAsync(login);
@@ -39,7 +46,7 @@ namespace Server
                 user = new User()
                 {
                     Nick = login,
-                    Password = Encrypt(password)
+                    Password = CreateHash(password)
                 };
                 await MakaoServerProtocol.Database.SaveUserAsync(user);
                 return true;
@@ -55,7 +62,7 @@ namespace Server
             if (user != null)
             {
 
-                if (user.Password == Encrypt(password))
+                if (user.Password == CreateHash(password))
                 {
                     token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
                     return (user, token);
